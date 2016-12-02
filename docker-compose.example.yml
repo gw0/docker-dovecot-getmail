@@ -1,0 +1,19 @@
+# Private email gateway
+#
+# Author: gw0 [http://gw.tnode.com/] <gw.2016@tnode.com>
+
+version: '2'
+
+services:
+  getmail_dovecot:
+    #build: http://github.com/gw0/docker-dovecot-getmail.git
+    image: gw000/dovecot-getmail:latest
+    volumes:
+      - /srv/mail/home:/home
+      - /srv/mail/cron.d:/etc/cron.d
+      - /srv/mail/ssl:/etc/ssl/private:ro
+    ports:
+      - "143:143"  # imap
+      - "993:993"  # imaps
+      - "4190:4190"  # managesieve
+    restart: unless-stopped
