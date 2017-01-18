@@ -31,7 +31,9 @@ RUN sed -i 's/#log_path = syslog/log_path = \/var\/log\/dovecot\/dovecot.log/' /
  && sed -i 's/#lda_mailbox_autosubscribe =.*/lda_mailbox_autosubscribe = yes/' /etc/dovecot/conf.d/15-lda.conf \
     # sieve plugin
  && sed -i 's/#mail_plugins = \$mail_plugins/mail_plugins = \$mail_plugins sieve/' /etc/dovecot/conf.d/15-lda.conf \
- && sed -i 's/#protocols = \$protocols sieve/protocols = \$protocols sieve/g' /etc/dovecot/conf.d/20-managesieve.conf
+ && sed -i 's/#protocols = \$protocols sieve/protocols = \$protocols sieve/g' /etc/dovecot/conf.d/20-managesieve.conf \
+    # imap idle
+ && sed -i 's/#imap_idle_notify_interval =.*/imap_idle_notify_interval = 29 mins/' /etc/dovecot/conf.d/20-imap.conf
 
 # setup entrypoint
 ENV DEFAULT_PASSWD="replaceMeNow"
