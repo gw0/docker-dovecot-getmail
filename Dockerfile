@@ -33,7 +33,9 @@ RUN sed -i 's/#log_path = syslog/log_path = \/var\/log\/dovecot\/dovecot.log/' /
  && sed -i 's/#mail_plugins = \$mail_plugins/mail_plugins = \$mail_plugins sieve/' /etc/dovecot/conf.d/15-lda.conf \
  && sed -i 's/#protocols = \$protocols sieve/protocols = \$protocols sieve/g' /etc/dovecot/conf.d/20-managesieve.conf \
     # imap idle
- && sed -i 's/#imap_idle_notify_interval =.*/imap_idle_notify_interval = 29 mins/' /etc/dovecot/conf.d/20-imap.conf
+ && sed -i 's/#imap_idle_notify_interval =.*/imap_idle_notify_interval = 29 mins/' /etc/dovecot/conf.d/20-imap.conf \
+    # fix getmail4 imap issue with large emails
+ && sed -i 's/^_MAXLINE =.*/_MAXLINE = 10000000/' /usr/lib/python2.7/imaplib.py
 
 # setup entrypoint
 ENV DEFAULT_PASSWD="replaceMeNow"
