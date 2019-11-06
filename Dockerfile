@@ -2,11 +2,19 @@
 #
 # Author: gw0 [http://gw.tnode.com/] <gw.2016@tnode.com>
 
-FROM debian:stretch
+FROM debian:buster-slim
 MAINTAINER gw0 [http://gw.tnode.com/] <gw.2016@tnode.com>
 
 # install debian packages
 ENV DEBIAN_FRONTEND noninteractive
+
+# configure dovecot.org deb https-repository to install latest dovecot version
+RUN apt-get update -qq \
+ && apt-get install --no-install-recommends -y apt-transport-https curl gpg gpg-agent ca-certificates
+RUN curl https://repo.dovecot.org/DOVECOT-REPO-GPG | gpg --import \
+&& gpg --export ED409DA1 > /etc/apt/trusted.gpg.d/dovecot.gpg
+RUN echo "deb https://repo.dovecot.org/ce-2.3-latest/debian/buster buster main" > /etc/apt/sources.list.d/dovecot.list
+
 RUN apt-get update -qq \
  && apt-get install --no-install-recommends -y \
     cron \
