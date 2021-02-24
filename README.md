@@ -1,7 +1,7 @@
 docker-dovecot-getmail
 ======================
 
-***docker-dovecot-getmail*** is a [*Docker*](http://www.docker.com/) image based on *Debian 8* implementing a private email gateway with [*dovecot*](http://en.wikipedia.org/wiki/Dovecot_(software)) and [*getmail*](http://en.wikipedia.org/wiki/Getmail) for gathering emails from multiple accounts on a private server (IMAP), but using a public email infrastructure for sending (SMTP).
+***docker-dovecot-getmail*** is a [*Docker*](http://www.docker.com/) image based on *Debian* implementing a private email gateway with [*dovecot*](http://en.wikipedia.org/wiki/Dovecot_(software)) and [*getmail*](http://en.wikipedia.org/wiki/Getmail) for gathering emails from multiple accounts on a private server (IMAP), but using a public email infrastructure for sending (SMTP).
 
 It is a *Docker* container realizing a similar architecture to:
 
@@ -23,7 +23,6 @@ It is a *Docker* container realizing a similar architecture to:
 
 Open source project:
 
-- <i class="fa fa-fw fa-home"></i> home: <http://gw.tnode.com/docker/dovecot-getmail/>
 - <i class="fa fa-fw fa-github-square"></i> github: <http://github.com/gw0/docker-dovecot-getmail/>
 - <i class="fa fa-fw fa-laptop"></i> technology: *debian*, *dovecot*, *getmail*
 - <i class="fa fa-fw fa-database"></i> docker hub: <https://hub.docker.com/r/gw000/dovecot-getmail/>
@@ -127,6 +126,6 @@ If you encounter any bugs or have feature requests, please file them in the [iss
 License
 =======
 
-Copyright &copy; 2016 *gw0* [<http://gw.tnode.com/>] &lt;<gw.2016@tnode.com>&gt;
+Copyright &copy; 2016-2021 *gw0* [<http://gw.tnode.com/>] &lt;<gw.2021@ena.one>&gt;
 
 This library is licensed under the [GNU Affero General Public License 3.0+](LICENSE_AGPL-3.0.txt) (AGPL-3.0+). Note that it is mandatory to make all modifications and complete source code of this library publicly available to any user.
