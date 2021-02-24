@@ -22,8 +22,8 @@ RUN sed -i 's/#log_path = syslog/log_path = \/var\/log\/dovecot\/dovecot.log/' /
  && sed -i 's/#auth_verbose =.*/auth_verbose = yes/' /etc/dovecot/conf.d/10-logging.conf \
     # ssl
  && sed -i 's/^ssl =.*/ssl = required/' /etc/dovecot/conf.d/10-ssl.conf \
- && sed -i 's/#ssl_cert =.*/ssl_cert = <\/etc\/ssl\/private\/dovecot.crt/' /etc/dovecot/conf.d/10-ssl.conf \
- && sed -i 's/#ssl_key =.*/ssl_key = <\/etc\/ssl\/private\/dovecot.key/' /etc/dovecot/conf.d/10-ssl.conf \
+ && sed -i 's/#\?ssl_cert =.*/ssl_cert = <\/etc\/ssl\/private\/dovecot.crt/' /etc/dovecot/conf.d/10-ssl.conf \
+ && sed -i 's/#\?ssl_key =.*/ssl_key = <\/etc\/ssl\/private\/dovecot.key/' /etc/dovecot/conf.d/10-ssl.conf \
     # mailboxes
  && sed -i 's/^mail_location =.*/mail_location = maildir:~\/Maildir:LAYOUT=fs/' /etc/dovecot/conf.d/10-mail.conf \
  && sed -i 's/#separator = $/separator = \//' /etc/dovecot/conf.d/10-mail.conf \
