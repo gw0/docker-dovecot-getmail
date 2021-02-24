@@ -1,16 +1,16 @@
 # Private email gateway with getmail and dovecot
 #
-# Author: gw0 [http://gw.tnode.com/] <gw.2016@tnode.com>
+# Author: gw0 [http://gw.tnode.com/] <gw.2021@ena.one>
 
-FROM debian:stretch
-MAINTAINER gw0 [http://gw.tnode.com/] <gw.2016@tnode.com>
+FROM debian:buster
+MAINTAINER gw0 [http://gw.tnode.com/] <gw.2021@ena.one>
 
 # install debian packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq \
  && apt-get install --no-install-recommends -y \
     cron \
-    getmail4 \
+    getmail \
     dovecot-imapd \
     dovecot-managesieved \
  && apt-get clean \
@@ -19,7 +19,7 @@ RUN apt-get update -qq \
 # configure dovecot
 RUN sed -i 's/#log_path = syslog/log_path = \/var\/log\/dovecot\/dovecot.log/' /etc/dovecot/conf.d/10-logging.conf \
     # authentication
- && sed -i 's/#auth_verbose =.*/auth_verbose = yes/' /etc/dovecot/conf.d/10-auth.conf \
+ && sed -i 's/#auth_verbose =.*/auth_verbose = yes/' /etc/dovecot/conf.d/10-logging.conf \
     # ssl
  && sed -i 's/^ssl =.*/ssl = required/' /etc/dovecot/conf.d/10-ssl.conf \
  && sed -i 's/#ssl_cert =.*/ssl_cert = <\/etc\/ssl\/private\/dovecot.crt/' /etc/dovecot/conf.d/10-ssl.conf \
@@ -34,7 +34,7 @@ RUN sed -i 's/#log_path = syslog/log_path = \/var\/log\/dovecot\/dovecot.log/' /
  && sed -i 's/#protocols = \$protocols sieve/protocols = \$protocols sieve/g' /etc/dovecot/conf.d/20-managesieve.conf \
     # imap idle
  && sed -i 's/#imap_idle_notify_interval =.*/imap_idle_notify_interval = 29 mins/' /etc/dovecot/conf.d/20-imap.conf \
-    # fix getmail4 imap issue with large emails
+    # fix getmail imap issue with large emails
  && sed -i 's/^_MAXLINE =.*/_MAXLINE = 10000000/' /usr/lib/python2.7/imaplib.py
 
 # setup entrypoint
