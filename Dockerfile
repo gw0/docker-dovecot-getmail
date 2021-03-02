@@ -2,7 +2,7 @@
 #
 # Author: gw0 [http://gw.tnode.com/] <gw.2021@ena.one>
 
-FROM debian:buster
+FROM debian:buster-slim
 MAINTAINER gw0 [http://gw.tnode.com/] <gw.2021@ena.one>
 
 # install debian packages
