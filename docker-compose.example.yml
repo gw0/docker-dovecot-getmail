@@ -7,7 +7,7 @@ services:
     #build: http://github.com/gw0/docker-dovecot-getmail.git
     image: gw000/dovecot-getmail:latest
     volumes:
-      - /srv/mail/home:/home
+      - /srv/mail/home/:/home/
       - /srv/mail/cron.d:/etc/cron.d
       - /srv/mail/ssl:/etc/ssl/private:ro
     ports:
