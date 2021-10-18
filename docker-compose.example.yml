@@ -8,8 +8,10 @@ services:
     image: gw000/dovecot-getmail:latest
     volumes:
       - /srv/mail/home/:/home/
-      - /srv/mail/cron.d:/etc/cron.d
       - /srv/mail/ssl:/etc/ssl/private:ro
+    evironment:
+      - CRON="*/30 * * * *"
+      - TZ=UTC
     ports:
       - "143:143"  # imap
       - "993:993"  # imaps
