@@ -31,11 +31,14 @@ Open source project:
 Usage
 =====
 
-Requirements:
+Required volumes:
 
 - `/home`: mounted users directories (`Maildir` in fs layout, `sieve`, `.getmail`)
-- `/etc/cron.d`: mounted crontabs for executing all getmail accounts
 - `/etc/ssl/private`: mounted SSL/TLS certificates (`dovecot.crt`, `dovecot.key`)
+
+Environment Variables
+- `CRON`: getmail will be called by cronjob to retrieve emails. Specify your schedule in cron format. Default is every 30 minutes `CRON="*/30 * * * *"` (don't forget the quotes). Keep in mind that  some mail providers will block high frequent retrieving.
+- `TZ`= set local timezone. Default is `TZ=UTC`
 
 Prepare your getmailrc account configurations per user (`/srv/mail/home/user/.getmail/getmailrc-user@email.invalid`):
 
@@ -89,16 +92,6 @@ received = false
 verbose = 1
 ```
 
-Prepare crontab file (`/srv/mail/cron.d/getmail`) for periodically checking for new mail for each user and account:
-
-```
-# /etc/cron.d/getmail: system-wide crontab for getmail
-SHELL=/bin/sh
-
-# m h dom mon dow user  command
-*/20 *  *   *   * user  ACC="user-refilter" && (date; flock -n ~/.getmail/lock-$ACC getmail --rcfile="getmailrc-$ACC" --idle Refilter) >>"/var/log/getmail/$ACC.log" 2>&1
-*/20 *  *   *   * user  ACC="user@email.invalid" && (date; flock -n ~/.getmail/lock-$ACC getmail --rcfile="getmailrc-$ACC" --idle INBOX) >>"/var/log/getmail/$ACC.log" 2>&1
-```
 
 Do not forget to place your SSL certificates as `/srv/mail/ssl/dovecot.crt` and `/srv/mail/ssl/dovecot.key`. SSL is required!
 
